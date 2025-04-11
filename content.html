@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List - Windows IT Bangladesh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0078d7;
+            --secondary: #00b294;
+            --accent: #ff4081;
+            --light: #f5f5f5;
+            --dark: #333333;
+            --table-header: #0078d7;
+            --table-odd: rgba(0, 120, 215, 0.05);
+            --table-even: white;
+            --table-hover: rgba(0, 178, 148, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px 0;
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .main-content {
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .description {
+            max-width: 800px;
+            margin: 30px auto;
+            color: var(--dark);
+        }
+        
+        .course-table-container {
+            margin: 40px auto;
+            max-width: 1000px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .course-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        
+        .course-table th {
+            background-color: var(--table-header);
+            color: white;
+            font-weight: 600;
+            padding: 15px 20px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        
+        .course-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .course-table tr:nth-child(odd) {
+            background-color: var(--table-odd);
+        }
+        
+        .course-table tr:nth-child(even) {
+            background-color: var(--table-even);
+        }
+        
+        .course-table tr:hover {
+            background-color: var(--table-hover);
+        }
+        
+        .course-name {
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .course-fee {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .course-table-container {
+                overflow-x: auto;
+            }
+            
+            .course-table {
+                min-width: 600px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .description {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    
+    <main class="main-content container">
+        <h1>Our Course Offerings</h1>
+        <p class="description">
+            Windows IT Bangladesh provides a wide range of professional IT courses designed to help you succeed in today's digital world. Explore our comprehensive course list below.
+        </p>
+        
+        <div class="course-table-container">
+            <table class="course-table">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Course Fee</th>
+                        <th>Duration</th>
+                        <th>Class Hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="course-name">01. Advanced Office Management</td>
+                        <td class="course-fee">7,000/-</td>
+                        <td>6 Months</td>
+                        <td>70 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">02. Basic Office Management</td>
+                        <td class="course-fee">4,000/-</td>
+                        <td>3 Months</td>
+                        <td>40 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">03. Professional Graphics Design</td>
+                        <td class="course-fee">16,000/-</td>
+                        <td>6 Months</td>
+                        <td>80 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">04. Basic Graphics Design</td>
+                        <td class="course-fee">10,000/-</td>
+                        <td>3 Months</td>
+                        <td>35 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">05. Data Entry With Freelancing</td>
+                        <td class="course-fee">10,000/-</td>
+                        <td>6 Months</td>
+                        <td>50 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">06. Advanced Excel</td>
+                        <td class="course-fee">6,000/-</td>
+                        <td>3 Months</td>
+                        <td>30 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">07. UI-UX Design</td>
+                        <td class="course-fee">24,000/-</td>
+                        <td>6 Months</td>
+                        <td>40 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">08. Bangla-English Type Boosting</td>
+                        <td class="course-fee">4,000/-</td>
+                        <td>3 Months</td>
+                        <td>30 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">09. Digital Marketing</td>
+                        <td class="course-fee">16,000/-</td>
+                        <td>6 Months</td>
+                        <td>60 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">10. Social Media Marketing</td>
+                        <td class="course-fee">12,000/-</td>
+                        <td>3 Months</td>
+                        <td>30 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">11. Basic Hardware</td>
+                        <td class="course-fee">8,000/-</td>
+                        <td>3 Months</td>
+                        <td>20 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">12. Wordpress Theme & Development</td>
+                        <td class="course-fee">12,000/-</td>
+                        <td>3 Months</td>
+                        <td>40 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">13. Office Management With Graphics</td>
+                        <td class="course-fee">10,000/-</td>
+                        <td>6 Months</td>
+                        <td>60 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">14. Freelancing</td>
+                        <td class="course-fee">10,000/-</td>
+                        <td>3 Months</td>
+                        <td>30 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">15. Print Media [Graphics Design]</td>
+                        <td class="course-fee">20,000/-</td>
+                        <td>6 Months</td>
+                        <td>100 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">16. Basic Video Editing</td>
+                        <td class="course-fee">20,000/-</td>
+                        <td>3 Months</td>
+                        <td>30 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">17. Video Editing</td>
+                        <td class="course-fee">30,000/-</td>
+                        <td>6 Months</td>
+                        <td>50 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">18. Web Development</td>
+                        <td class="course-fee">32,000/-</td>
+                        <td>6 Months</td>
+                        <td>70 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">19. Professional Video Editing</td>
+                        <td class="course-fee">30,000/-</td>
+                        <td>6 Months</td>
+                        <td>70 Hours</td>
+                    </tr>
+                    <tr>
+                        <td class="course-name">20. Motion Graphics</td>
+                        <td class="course-fee">25,000/-</td>
+                        <td>6 Months</td>
+                        <td>60 Hours</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <a href="index.html" class="back-button">Back to Contact Page</a>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Windows IT Bangladesh. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
