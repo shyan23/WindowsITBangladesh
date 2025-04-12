@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #1292fa;
@@ -189,6 +191,38 @@
             background: linear-gradient(135deg, var(--accent), var(--primary));
         }
         
+        /* Special styling for the connect card */
+        .connect-card {
+            width: 220px;
+        }
+        
+        .connect-options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        .connect-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .connect-option:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .connect-option i {
+            font-size: 18px;
+            color: var(--secondary);
+        }
+        
         footer {
             background-color: var(--dark);
             color: white;
@@ -225,6 +259,11 @@
                 width: calc(50% - 15px);
                 max-width: 150px;
                 padding: 15px;
+            }
+            
+            .connect-card {
+                width: calc(100% - 15px);
+                max-width: 220px;
             }
             
             .icon {
@@ -305,35 +344,53 @@
         <div class="contact-links">
             <div class="contact-card">
                 <a href="https://www.facebook.com/windows.it.bd/" class="ripple-effect">
-                    <div class="icon">f</div>
+                    <div class="icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
                     <span>Facebook</span>
                 </a>
             </div>
             
-            <div class="contact-card">
-                <a href="https://wa.link/gza611" class="ripple-effect">
-                    <div class="icon">W</div>
-                    <span>WhatsApp</span>
-                </a>
+            <div class="contact-card connect-card">
+                <div class="icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <span style="font-weight: 500; margin-top: 10px;">Connect us with</span>
+                <div class="connect-options">
+                    <a href="https://wa.link/gza611" class="connect-option ripple-effect">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="tel:01333661342" class="connect-option ripple-effect">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>01333661342</span>
+                    </a>
+                </div>
             </div>
             
             <div class="contact-card">
                 <a href="https://maps.app.goo.gl/KbwdgoUUfRcvWGB77" class="ripple-effect">
-                    <div class="icon">📍</div>
+                    <div class="icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
                     <span>Find us on Map</span>
                 </a>
             </div>
             
             <div class="contact-card">
                 <a href="mailto:windowsitbd2024@gmail.com" class="ripple-effect">
-                    <div class="icon">✉️</div>
+                    <div class="icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
                     <span>Email us</span>
                 </a>
             </div>
             
             <div class="contact-card">
                 <a href="content.html" class="ripple-effect">
-                    <div class="icon">📚</div>
+                    <div class="icon">
+                        <i class="fas fa-book"></i>
+                    </div>
                     <span>Course List</span>
                 </a>
             </div>
@@ -350,11 +407,14 @@
         // Add ripple effect and selection animation
         document.querySelectorAll('.ripple-effect').forEach(button => {
             button.addEventListener('click', function(e) {
+                // Find the parent card
+                const card = this.closest('.contact-card');
+                
                 // Prevent multiple animations
-                if (this.parentNode.classList.contains('selected')) return;
+                if (card && card.classList.contains('selected')) return;
                 
                 // Add selected class for animation
-                this.parentNode.classList.add('selected');
+                if (card) card.classList.add('selected');
                 
                 // Create ripple element
                 const ripple = document.createElement('span');
@@ -371,7 +431,7 @@
                 // Remove ripple after animation completes
                 setTimeout(() => {
                     ripple.remove();
-                    this.parentNode.classList.remove('selected');
+                    if (card) card.classList.remove('selected');
                 }, 600);
             });
         });
