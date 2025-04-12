@@ -22,43 +22,46 @@
             box-sizing: border-box;
         }
         
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #7fcff7 0%, #c3cfe2 100%);
             color: var(--dark);
-            min-height: 100vh;
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-        }
-        
-        header {
-            background-color: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 20px 0;
-            position: relative;
-        }
-        
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding-left: 20px;
+            width: 100%;
         }
         
         .main-content {
-            padding: 60px 0;
-            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            overflow-y: auto;
+            height: 100%;
+            scrollbar-width: thin;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .main-content::-webkit-scrollbar-thumb {
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 10px;
         }
         
         .welcome-section {
@@ -66,13 +69,13 @@
             align-items: center;
             justify-content: center;
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
         
         .logo {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             display: block;
         }
         
@@ -87,7 +90,7 @@
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
             margin-bottom: 10px;
             color: var(--primary);
             position: relative;
@@ -106,8 +109,8 @@
         }
         
         h2 {
-            font-size: 1.8rem;
-            margin: 30px 0 20px;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            margin: 20px 0 15px;
             color: var(--secondary);
         }
         
@@ -116,16 +119,17 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-            margin-top: 40px;
+            margin-top: 20px;
+            padding: 0 10px;
         }
         
         .contact-card {
             background: white;
             border-radius: 10px;
-            padding: 25px;
-            width: 250px;
+            padding: 20px;
+            width: 200px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
         }
@@ -141,8 +145,12 @@
         }
         
         .contact-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.05);
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .contact-card:active {
+            transform: translateY(-5px) scale(0.95);
         }
         
         .contact-card a {
@@ -156,15 +164,21 @@
         }
         
         .icon {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 24px;
+            font-size: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .contact-card:hover .icon {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .contact-card:nth-child(2n) .icon {
@@ -179,8 +193,8 @@
             background-color: var(--dark);
             color: white;
             text-align: center;
-            padding: 20px 0;
-            margin-top: 60px;
+            padding: 10px 0;
+            font-size: 0.9rem;
         }
         
         @media (max-width: 768px) {
@@ -198,38 +212,83 @@
                 transform: translateX(-50%);
             }
             
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+            
             .contact-links {
-                flex-direction: column;
-                align-items: center;
+                gap: 15px;
             }
             
             .contact-card {
-                width: 100%;
-                max-width: 300px;
+                width: calc(50% - 15px);
+                max-width: 150px;
+                padding: 15px;
             }
             
-            h1 {
-                font-size: 2rem;
+            .icon {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .logo {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .welcome-section {
+                margin-bottom: 10px;
             }
             
             h2 {
-                font-size: 1.5rem;
+                margin: 10px 0;
+            }
+            
+            .contact-card {
+                padding: 15px 10px;
+            }
+            
+            footer {
+                padding: 5px 0;
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Animation for card selection */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .contact-card.selected {
+            animation: pulse 0.5s ease;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+        
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
             }
         }
     </style>
 </head>
 <body>
-    <!-- <header>
-        <div class="container">
-            <div class="logo-container">
-                <div>
-                    <h3>Windows IT</h3>
-                    <p>Bangladesh</p>
-                </div>
-            </div>
-        </div>
-    </header> -->
-    
     <main class="main-content container">
         <div class="welcome-section">
             <div class="logo">
@@ -245,35 +304,35 @@
         
         <div class="contact-links">
             <div class="contact-card">
-                <a href="https://www.facebook.com/windows.it.bd/">
+                <a href="https://www.facebook.com/windows.it.bd/" class="ripple-effect">
                     <div class="icon">f</div>
                     <span>Facebook</span>
                 </a>
             </div>
             
             <div class="contact-card">
-                <a href="https://wa.link/gza611">
+                <a href="https://wa.link/gza611" class="ripple-effect">
                     <div class="icon">W</div>
                     <span>WhatsApp</span>
                 </a>
             </div>
             
             <div class="contact-card">
-                <a href="https://maps.app.goo.gl/KbwdgoUUfRcvWGB77">
+                <a href="https://maps.app.goo.gl/KbwdgoUUfRcvWGB77" class="ripple-effect">
                     <div class="icon">📍</div>
                     <span>Find us on Map</span>
                 </a>
             </div>
             
             <div class="contact-card">
-                <a href="mailto:windowsitbd2024@gmail.com">
+                <a href="mailto:windowsitbd2024@gmail.com" class="ripple-effect">
                     <div class="icon">✉️</div>
                     <span>Email us</span>
                 </a>
             </div>
             
             <div class="contact-card">
-                <a href="content.html">
+                <a href="content.html" class="ripple-effect">
                     <div class="icon">📚</div>
                     <span>Course List</span>
                 </a>
@@ -286,5 +345,53 @@
             <p>&copy; 2024 Windows IT Bangladesh. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Add ripple effect and selection animation
+        document.querySelectorAll('.ripple-effect').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Prevent multiple animations
+                if (this.parentNode.classList.contains('selected')) return;
+                
+                // Add selected class for animation
+                this.parentNode.classList.add('selected');
+                
+                // Create ripple element
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                this.appendChild(ripple);
+                
+                // Position the ripple
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${e.clientX - rect.left - size/2}px`;
+                ripple.style.top = `${e.clientY - rect.top - size/2}px`;
+                
+                // Remove ripple after animation completes
+                setTimeout(() => {
+                    ripple.remove();
+                    this.parentNode.classList.remove('selected');
+                }, 600);
+            });
+        });
+
+        // Adjust content to fit viewport height
+        function adjustHeight() {
+            const vh = window.innerHeight;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
+            // Adjust font sizes and spacing based on viewport height
+            if (vh < 500) {
+                document.body.classList.add('very-small-height');
+            } else {
+                document.body.classList.remove('very-small-height');
+            }
+        }
+
+        // Run on load and resize
+        window.addEventListener('load', adjustHeight);
+        window.addEventListener('resize', adjustHeight);
+    </script>
 </body>
 </html>
